@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factomedia</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(120deg, #f6f8fc, #e9efff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #343a40;
+            text-align: center;
+            margin: 0;
+            animation: fadeInSlideDown 1.5s ease-out;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            text-align: center;
+            margin: 20px 0;
+            max-width: 600px;
+            line-height: 1.6;
+            animation: fadeInSlideUp 2s ease-out;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+            animation: popIn 2.5s ease-out;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0, 123, 255, 0.5);
+        }
+
+        .cta-btn span {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 80%);
+            top: -150%;
+            left: -150%;
+            pointer-events: none;
+            animation: pulse 2.5s infinite;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: #adb5bd;
+            text-align: center;
+            animation: fadeIn 2.5s ease-out;
+        }
+        #searchForm {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        #searchForm input {
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: 2px solid #007bff;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            transition: all 0.3s ease;
+            width: 300px;
+            box-sizing: border-box;
+        }
+        
+        #searchForm input:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        
+        #searchForm button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        #searchForm button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        #searchForm button:active {
+            transform: scale(1);
+        }
+        
+        #searchResults {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #343a40;
+            text-align: center;
+        }
+        
+        #searchResults a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        #searchResults a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeInSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                top: -150%;
+                left: -150%;
+                opacity: 1;
+            }
+            100% {
+                top: 150%;
+                left: 150%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Factomedia</h1>
+    <p>Your one-stop platform for reliable, high-quality, and community-driven facts Let’s make learning exciting and accessible for everyone.</p>
+    <a href="facts/taylor-swift.html" class="cta-btn">
+        Explore a Random Fact
+        <span></span>
+    </a>
+
+    <footer>
+        © 2024 Factomedia. Empowering knowledge, one article at a time.
+    </footer>
+
+    <script>
+        // Floating Animation for Call-to-Action Button
+        const btn = document.querySelector('.cta-btn');
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            btn.style.setProperty('--mouse-x', `${x}px`);
+            btn.style.setProperty('--mouse-y', `${y}px`);
+        });
+
+        // Typewriter Effect for Description
+        const textElement = document.querySelector('p');
+        const text = textElement.textContent;
+        textElement.textContent = '';
+        let idx = 0;
+        function typeEffect() {
+            if (idx < text.length) {
+                textElement.textContent += text[idx];
+                idx++;
+                setTimeout(typeEffect, 50);
+            }
+        }
+        setTimeout(typeEffect, 500);
+
+        // Footer Clock Update
+        const footer = document.querySelector('footer');
+        setInterval(() => {
+            const time = new Date().toLocaleTimeString();
+            footer.textContent = `© 2024 Factomedia. Current Time: ${time}`;
+        }, 1000);
+    </script>
+</body>
+</html>
