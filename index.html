@@ -197,31 +197,67 @@
     </style>
 </head>
 <body>
-        <a title="free web counter"><img src="https://counter6.optistats.ovh/private/freecounterstat.php?c=b3qphetawxu1a5hn2zu8lt5gp6r6khfp" border="0" title="free web counter" alt="free web counter"></a>
+    <a title="free web counter"><img src="https://counter6.optistats.ovh/private/freecounterstat.php?c=b3qphetawxu1a5hn2zu8lt5gp6r6khfp" border="0" title="free web counter" alt="free web counter"></a>
 
-    <h1>Welcome to Factomedia</h1>
-    <p>Your one-stop platform for reliable, high-quality, and community-driven facts Let’s make learning exciting and accessible for everyone.</p>
-    <a href="facts/taylor-swift.html" class="cta-btn">
-        Explore a Random Fact
-        <span></span>
-    </a>
+    <div id="layout">
+        <aside id="sidebar">
+            <h2>Menu</h2>
+            <ul id="menuList">
+                <!-- Links will be dynamically injected -->
+            </ul>
+        </aside>
+        <main>
+            <h1>Welcome to Factomedia</h1>
+            <p>Your one-stop platform for reliable, high-quality, and community-driven facts. Let’s make learning exciting and accessible for everyone.</p>
+            <a href="facts/taylor-swift.html" class="cta-btn">
+                Explore a Random Fact
+                <span></span>
+            </a>
+
+            <form id="searchForm" onsubmit="search(event)">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+            <div id="searchResults"></div>
+        </main>
+    </div>
 
     <footer>
         © 2024 Factomedia. Empowering knowledge, one article at a time.
     </footer>
 
     <script>
-        // Floating Animation for Call-to-Action Button
-        const btn = document.querySelector('.cta-btn');
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            btn.style.setProperty('--mouse-x', `${x}px`);
-            btn.style.setProperty('--mouse-y', `${y}px`);
+        // Menu Data
+        const menuData = [
+            { name: "Home", path: "index.html" },
+            { name: "Taylor Swift", path: "facts/taylor-swift.html" },
+            { name: "2024 Summer Olympics", path: "facts/2024-summer-olympics.html" },
+            { name: "Greek", path: "facts/greek.html" }
+        ];
+
+        // Load Menu
+        const menuList = document.getElementById('menuList');
+        menuData.forEach(item => {
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = item.path;
+            link.textContent = item.name;
+            li.appendChild(link);
+            menuList.appendChild(li);
         });
 
-        // Typewriter Effect for Description
+        // Search Functionality
+        function search(event) {
+            event.preventDefault();
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const results = menuData.filter(item => item.name.toLowerCase().includes(query));
+            const resultsDiv = document.getElementById('searchResults');
+            resultsDiv.innerHTML = results.length
+                ? results.map(item => `<a href="${item.path}">${item.name}</a>`).join('<br>')
+                : 'No results found.';
+        }
+
+        // Existing Typewriter Effect
         const textElement = document.querySelector('p');
         const text = textElement.textContent;
         textElement.textContent = '';
