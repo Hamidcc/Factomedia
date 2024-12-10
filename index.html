@@ -200,12 +200,6 @@
     <a title="free web counter"><img src="https://counter6.optistats.ovh/private/freecounterstat.php?c=b3qphetawxu1a5hn2zu8lt5gp6r6khfp" border="0" title="free web counter" alt="free web counter"></a>
 
     <div id="layout">
-        <aside id="sidebar">
-            <h2>Menu</h2>
-            <ul id="menuList">
-                <!-- Links will be dynamically injected -->
-            </ul>
-        </aside>
         <main>
             <h1>Welcome to Factomedia</h1>
             <p>Your one-stop platform for reliable, high-quality, and community-driven facts. Let’s make learning exciting and accessible for everyone.</p>
@@ -236,17 +230,6 @@
             { name: "Greek", path: "facts/greek.html" }
         ];
 
-        // Load Menu
-        const menuList = document.getElementById('menuList');
-        menuData.forEach(item => {
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = item.path;
-            link.textContent = item.name;
-            li.appendChild(link);
-            menuList.appendChild(li);
-        });
-
         // Search Functionality
         function search(event) {
             event.preventDefault();
@@ -267,7 +250,7 @@
             if (idx < text.length) {
                 textElement.textContent += text[idx];
                 idx++;
-                setTimeout(typeEffect, 50);
+                setTimeout(typeEffect, 30);
             }
         }
         setTimeout(typeEffect, 500);
