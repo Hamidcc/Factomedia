@@ -1,1 +1,1 @@
-KICK_ALL
+ICK_ALL
